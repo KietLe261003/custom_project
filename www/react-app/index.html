@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Project React App</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { background: #f8f9fa; padding: 1rem; margin-bottom: 2rem; border-radius: 8px; }
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+        .card { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .card h3 { margin-top: 0; color: #333; }
+        .metric { font-size: 2rem; font-weight: bold; color: #007bff; }
+        .metric.success { color: #28a745; }
+        .metric.warning { color: #ffc107; }
+        .metric.danger { color: #dc3545; }
+        button { background: #007bff; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; margin: 0.25rem; }
+        button:hover { background: #0056b3; }
+        .mt-2 { margin-top: 2rem; }
+        .mt-1 { margin-top: 1rem; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        
+        function Header() {
+            return (
+                <div className="header">
+                    <h1>Custom Project Dashboard</h1>
+                    <p>React.js Frontend for Frappe Custom Project</p>
+                </div>
+            );
+        }
+        
+        function Dashboard() {
+            const [data, setData] = useState({
+                users: 150,
+                projects: 25,
+                tasks: 89,
+                completedTasks: 67
+            });
+            
+            const cardStyle1 = { marginTop: '2rem' };
+            const cardStyle2 = { marginTop: '1rem' };
+            
+            return (
+                <div className="container">
+                    <Header />
+                    
+                    <div className="dashboard-grid">
+                        <div className="card">
+                            <h3>Total Users</h3>
+                            <div className="metric">{data.users}</div>
+                        </div>
+                        <div className="card">
+                            <h3>Active Projects</h3>
+                            <div className="metric success">{data.projects}</div>
+                        </div>
+                        <div className="card">
+                            <h3>Total Tasks</h3>
+                            <div className="metric warning">{data.tasks}</div>
+                        </div>
+                        <div className="card">
+                            <h3>Completed Tasks</h3>
+                            <div className="metric danger">{data.completedTasks}</div>
+                        </div>
+                    </div>
+                    
+                    <div className="card mt-2">
+                        <h3>Quick Actions</h3>
+                        <button onClick={() => alert('Create New Project')}>Create Project</button>
+                        <button onClick={() => alert('Add User')}>Add User</button>
+                        <button onClick={() => alert('View Reports')}>View Reports</button>
+                        <button onClick={() => window.location.href='/app'}>Open Frappe Desk</button>
+                    </div>
+                    
+                    <div className="card mt-1">
+                        <h3>About</h3>
+                        <p>This is a React.js frontend integrated with your Frappe Custom Project app.</p>
+                        <p>Features: Modern UI, API integration, Responsive design</p>
+                        <p>Access Frappe: <a href="/app" target="_blank">Open Frappe Desk</a></p>
+                    </div>
+                </div>
+            );
+        }
+        
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(React.createElement(Dashboard));
+    </script>
+</body>
+</html>
